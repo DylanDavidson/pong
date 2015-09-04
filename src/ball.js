@@ -1,7 +1,8 @@
 var Ball = function()
 {
   Ball.COLOR = 0x9b59b6;
-  this.geometry = new THREE.SphereGeometry(0.5);
+  Ball.RADIUS = 0.5;
+  this.geometry = new THREE.SphereGeometry(Ball.RADIUS);
   this.material = new THREE.MeshBasicMaterial({ color: Ball.COLOR });
   this.ball = new THREE.Mesh(this.geometry, this.material);
   this.ball.position.z = 1;

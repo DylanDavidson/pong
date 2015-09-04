@@ -2,20 +2,6 @@ var xDir = .02;
 var yDir = .04;
 function moveBallAndMaintainPaddles()
 {
-  ball.changeX(xDir);
-  ball.changeY(yDir);
-
-  if( ball.getX() < -4 )
-  {
-    xDir = .02;
-    three.play();
-  }
-  else if( ball.getX() > 4 )
-  {
-    xDir = -0.02;
-    four.play();
-  }
-
   if( ball.getY() < -8.5 && yDir < 0 )
   {
     yDir = 0.04;
@@ -70,6 +56,7 @@ var right_wall;
 var player_paddle;
 var enemy_paddle;
 var ball;
+var ballPhysics;
 
 function init()
 {
@@ -98,6 +85,8 @@ function init()
   // Create Ball
   ball = new Ball();
   new Edge(ball);
+
+  ballPhysics = new BallPhysics();
 
   render();
 }
@@ -132,7 +121,7 @@ function render()
   listenForKeyboard();
   checkPlayerWallCollision();
   moveBallAndMaintainPaddles();
-
+  ballPhysics.update();
   requestAnimationFrame(render);
   base.render();
 }

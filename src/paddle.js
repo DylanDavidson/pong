@@ -30,6 +30,11 @@ Paddle.prototype.getX = function()
   return this.paddle.position.x;
 }
 
+Paddle.prototype.getY = function()
+{
+  return this.paddle.position.y;
+}
+
 Paddle.prototype.setX = function(x)
 {
   this.paddle.position.x = x;
