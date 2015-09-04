@@ -17,14 +17,19 @@ var ASPECT_RATIO = WIDTH / HEIGHT;
 var NEAR_FRUSTRUM = 0.1;
 var FAR_FRUSTRUM = 1000;
 
+// Spotlight Constants
+var LIGHT_COLOR = 0xffffff;
+
 var Base = function()
 {
   this.scene = new THREE.Scene();
   this.renderer = new THREE.WebGLRenderer();
   this.camera = new THREE.PerspectiveCamera(FOV, ASPECT_RATIO, NEAR_FRUSTRUM, FAR_FRUSTRUM);
+  this.spotlight = new THREE.SpotLight(LIGHT_COLOR);
 
   this.setupRenderer();
   this.setupCamera();
+  this.setupSpotlight();
 }
 
 // Returns the scene object
@@ -63,10 +68,21 @@ Base.prototype.setupRenderer = function()
   document.body.appendChild(this.renderer.domElement);
 }
 
+// Sets default values for camera and adds to scene
 Base.prototype.setupCamera = function()
 {
   this.setCameraPosition(0, 0, 30);
   this.camera.lookAt(this.scene.position);
 
   this.addToScene(this.camera);
+}
+
+// Sets default values for spotlight and adds to scene
+Base.prototype.setupSpotlight = function()
+{
+  this.spotlight.position.set(10, 20, 20);
+  this.spotlight.shadowCameraNear = 20;
+  this.spotlight.shadowCameraFar = 50;
+  this.spotlight.castShadow = true;
+  this.addToScene(this.spotlight);
 }
