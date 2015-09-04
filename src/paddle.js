@@ -1,12 +1,19 @@
-var PADDLE_COLOR = 'salmon';
-
 var Paddle = function(y)
 {
-  this.geometry = new THREE.BoxGeometry(2, .5, 3);
-  this.material = new THREE.MeshBasicMaterial({ color: PADDLE_COLOR });
+  Paddle.SPEED = 0.1;
+  Paddle.COLOR = 0x2c3e50;
+  Paddle.WIDTH = 2;
+
+  this.geometry = new THREE.BoxGeometry(Paddle.WIDTH, .5, 1);
+  this.material = new THREE.MeshBasicMaterial({ color: Paddle.COLOR });
   this.paddle = new THREE.Mesh(this.geometry, this.material);
+
+  this.paddle.position.z = 1;
   this.paddle.position.y = y;
+
+  base.addToScene(this.paddle)
 }
+
 
 Paddle.prototype.getObject = function()
 {

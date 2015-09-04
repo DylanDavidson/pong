@@ -5,15 +5,6 @@ function moveBallAndMaintainPaddles()
   ball.changeX(xDir);
   ball.changeY(yDir);
 
-  if( Key.isDown( Key.A ) )
-  {
-    player_paddle.changeX(-0.02);
-  }
-  else if( Key.isDown( Key.D ) )
-  {
-    player_paddle.changeX(0.02);
-  }
-
   if( ball.getX() < -4 )
   {
     xDir = .02;
@@ -87,33 +78,62 @@ function init()
 
   // Create Play Board
   board = new Board();
-  base.addToScene(board.getObject());
+  var board_edge = new Edge(board);
 
   // Create Walls
-  left_wall = new Wall(-5);
-  base.addToScene(left_wall.getObject());
+  left_wall = new Wall(-6);
+  right_wall = new Wall(6);
 
-  right_wall = new Wall(5);
-  base.addToScene(right_wall.getObject());
+  // Wall edges
+  new Edge(right_wall);
+  new Edge(left_wall);
 
   // Create Paddles
-  player_paddle = new Paddle(-9);
-  base.addToScene(player_paddle.getObject());
+  player_paddle = new Paddle(-9.5);
+  enemy_paddle = new Paddle(9.5);
 
-  enemy_paddle = new Paddle(9);
-  base.addToScene(enemy_paddle.getObject());
+  new Edge(player_paddle);
+  new Edge(enemy_paddle);
 
   // Create Ball
   ball = new Ball();
-  base.addToScene(ball.getObject());
+  new Edge(ball);
 
   render();
 }
 
+function listenForKeyboard()
+{
+  if(Key.isDown(Key.A) || Key.isDown(Key.LEFT_ARROW))
+  {
+    player_paddle.changeX(Paddle.SPEED * -1);
+  }
+  else if(Key.isDown(Key.D) || Key.isDown(Key.RIGHT_ARROW))
+  {
+    player_paddle.changeX(Paddle.SPEED);
+  }
+}
+
+function checkPlayerWallCollision()
+{
+  if((player_paddle.getX() - Paddle.WIDTH) < left_wall.getX())
+  {
+    player_paddle.setX(left_wall.getX() + Paddle.WIDTH);
+  }
+  else if((player_paddle.getX() + Paddle.WIDTH) > right_wall.getX())
+  {
+    player_paddle.setX(right_wall.getX() - Paddle.WIDTH);
+  }
+
+}
+
 function render()
 {
+  listenForKeyboard();
+  checkPlayerWallCollision();
   moveBallAndMaintainPaddles();
-  requestAnimationFrame( render );
+
+  requestAnimationFrame(render);
   base.render();
 }
 

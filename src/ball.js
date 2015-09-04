@@ -1,9 +1,12 @@
-var BALL_COLOR = 'blue';
 var Ball = function()
 {
+  Ball.COLOR = 0x9b59b6;
   this.geometry = new THREE.SphereGeometry(0.5);
-  this.material = new THREE.MeshBasicMaterial({ color: BALL_COLOR });
+  this.material = new THREE.MeshBasicMaterial({ color: Ball.COLOR });
   this.ball = new THREE.Mesh(this.geometry, this.material);
+  this.ball.position.z = 1;
+
+  base.addToScene(this.ball);
 }
 
 Ball.prototype.getObject = function()

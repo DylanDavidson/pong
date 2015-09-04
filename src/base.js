@@ -71,7 +71,7 @@ Base.prototype.setupRenderer = function()
 // Sets default values for camera and adds to scene
 Base.prototype.setupCamera = function()
 {
-  this.setCameraPosition(0, 0, 30);
+  this.setCameraPosition(0, -20, 5);
   this.camera.lookAt(this.scene.position);
 
   this.addToScene(this.camera);
