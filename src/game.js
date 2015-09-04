@@ -57,6 +57,7 @@ var player_paddle;
 var enemy_paddle;
 var ball;
 var ballPhysics;
+var score;
 
 function init()
 {
@@ -87,6 +88,8 @@ function init()
   new Edge(ball);
 
   ballPhysics = new BallPhysics();
+
+  score = new Score();
 
   render();
 }

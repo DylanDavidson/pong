@@ -18,19 +18,36 @@ BallPhysics.prototype.checkWallCollision = function()
 
 BallPhysics.prototype.checkPaddleCollision = function()
 {
-  if(ball.getY() - Ball.RADIUS < player_paddle.getY() &&
-     ball.getX() > player_paddle.getX() - 1 &&
-     ball.getX() < player_paddle.getX() + 1)
+  // Ball has reached player paddle area
+  if(ball.getY() - Ball.RADIUS < player_paddle.getY())
   {
-    this.yVelocity *= -1;
-    one.play();
+    // Paddle is in position to block ball
+    if(ball.getX() > player_paddle.getX() - 1 && ball.getX() < player_paddle.getX() + 1)
+    {
+      this.yVelocity *= -1;
+      one.play();
+    }
+    else
+    {
+      // Enemy scored
+      score.enemyScored();
+      this.reset();
+    }
   }
-  else if(ball.getY() + Ball.RADIUS > enemy_paddle.getY() &&
-     ball.getX() > enemy_paddle.getX() - 1 &&
-     ball.getX() < enemy_paddle.getX() + 1)
+  else if(ball.getY() + Ball.RADIUS > enemy_paddle.getY())
   {
-    this.yVelocity *= -1;
-    two.play();
+    // Enemy in positon to block ball
+    if(ball.getX() > enemy_paddle.getX() - 1 && ball.getX() < enemy_paddle.getX() + 1)
+    {
+      this.yVelocity *= -1;
+      two.play();
+    }
+    else
+    {
+      // Player scored
+      score.playerScored();
+      this.reset();
+    }
   }
 }
 
@@ -42,4 +59,11 @@ BallPhysics.prototype.update = function()
   this.checkWallCollision();
   this.checkPaddleCollision();
 
+}
+
+BallPhysics.prototype.reset = function()
+{
+  ball.reset();
+  this.xVelocity = BallPhysics.START_X_VELOCITY;
+  this.yVelocity = BallPhysics.START_Y_VELOCITY;
 }

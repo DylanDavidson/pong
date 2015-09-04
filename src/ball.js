@@ -44,3 +44,9 @@ Ball.prototype.changeY = function(y)
 {
   this.ball.position.y += y;
 }
+
+Ball.prototype.reset = function()
+{
+  this.ball.position.x = 0;
+  this.ball.position.y = 0;
+}
