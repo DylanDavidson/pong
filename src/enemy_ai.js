@@ -1,6 +1,6 @@
 var EnemyAI = function(enemy, ball)
 {
-  EnemyAI.SPEED = Paddle.SPEED * 1.15;
+  EnemyAI.SPEED = Paddle.SPEED * 1.13;
   this.enemy = enemy;
   this.ball = ball;
 }

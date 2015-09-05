@@ -6,8 +6,19 @@ var Ball = function()
   this.material = new THREE.MeshBasicMaterial({ color: Ball.COLOR });
   this.ball = new THREE.Mesh(this.geometry, this.material);
   this.ball.position.z = 1;
+  this.ball.position.x = this.getStartPosition();
 
   base.addToScene(this.ball);
+}
+
+Ball.prototype.getStartPosition = function()
+{
+  var x = Math.random() * 5;
+  if(Math.random() < 0.5)
+  {
+    x *= -1;
+  }
+  return x;
 }
 
 Ball.prototype.getObject = function()
@@ -47,6 +58,6 @@ Ball.prototype.changeY = function(y)
 
 Ball.prototype.reset = function()
 {
-  this.ball.position.x = 0;
+  this.ball.position.x = this.getStartPosition();
   this.ball.position.y = 0;
 }
