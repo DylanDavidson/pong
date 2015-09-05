@@ -1,6 +1,6 @@
 var Paddle = function(y)
 {
-  Paddle.SPEED = 0.1;
+  Paddle.SPEED = 0.11;
   Paddle.COLOR = 0x2c3e50;
   Paddle.WIDTH = 2;
 

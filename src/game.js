@@ -1,43 +1,3 @@
-var xDir = .02;
-var yDir = .04;
-function moveBallAndMaintainPaddles()
-{
-  if( ball.getY() < -8.5 && yDir < 0 )
-  {
-    yDir = 0.04;
-
-    if( Math.abs( player_paddle.getX() - ball.getX() ) <= 2 )
-    {
-      xDir = -xDir;
-      one.play();
-    }
-    else
-    {
-      ball.setX(0);
-      ball.setY(0);
-
-      explode.play();
-    }
-  }
-  else if( ball.getY() > 8.5 && yDir > 0 )
-  {
-    yDir = -0.04;
-
-    if( Math.abs( enemy_paddle.getX() - ball.getX() ) <= 2 )
-    {
-      xDir = -xDir;
-      two.play();
-    }
-    else
-    {
-      ball.position.x = ball.position.y = 0;
-      explode.play();
-    }
-  }
-
-  enemy_paddle.setX(ball.getX());
-}
-
 var explode, one, two, three, four, five;
 function loadSounds()
 {
@@ -57,6 +17,7 @@ var player_paddle;
 var enemy_paddle;
 var ball;
 var ballPhysics;
+var enemyAI;
 var score;
 
 function init()
@@ -88,10 +49,33 @@ function init()
   new Edge(ball);
 
   ballPhysics = new BallPhysics();
+  enemyAI = new EnemyAI(enemy_paddle, ball);
 
   score = new Score();
 
-  render();
+  base.render();
+}
+
+var count = 3;
+function start()
+{
+  document.getElementById('menu').remove();
+  countdown();
+}
+
+function countdown()
+{
+  if(count <= 0)
+   {
+     Banner.hideBanner();
+     render(); // Officially start game
+   }
+   else
+   {
+     Banner.showText(count);
+     count -= 1;
+     setTimeout(countdown, 1000);
+   }
 }
 
 function listenForKeyboard()
@@ -116,15 +100,16 @@ function checkPlayerWallCollision()
   {
     player_paddle.setX(right_wall.getX() - Paddle.WIDTH);
   }
-
 }
 
 function render()
 {
   listenForKeyboard();
   checkPlayerWallCollision();
-  moveBallAndMaintainPaddles();
+
   ballPhysics.update();
+  enemyAI.update();
+
   requestAnimationFrame(render);
   base.render();
 }
