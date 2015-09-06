@@ -1,3 +1,7 @@
+// Dylan Davidson
+// Pong - CAP 4720
+//
+
 // Constants
 
 // Colors
@@ -20,6 +24,7 @@ var FAR_FRUSTRUM = 1000;
 // Spotlight Constants
 var LIGHT_COLOR = 0xffffff;
 
+// Instantiate Three.js objects and set them up with default values
 var Base = function()
 {
   this.scene = new THREE.Scene();
@@ -50,6 +55,7 @@ Base.prototype.render = function()
   this.renderer.render(this.scene, this.camera);
 }
 
+// Moves camera to given xyz position
 Base.prototype.setCameraPosition = function(x, y, z)
 {
   this.camera.position.x = x;

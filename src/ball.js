@@ -1,16 +1,25 @@
+// Dylan Davidson
+// Pong - CAP 4720
+//
+
+// Class that creates Ball object
 var Ball = function()
 {
   Ball.COLOR = 0x9b59b6;
   Ball.RADIUS = 0.5;
+
   this.geometry = new THREE.SphereGeometry(Ball.RADIUS);
   this.material = new THREE.MeshBasicMaterial({ color: Ball.COLOR });
   this.ball = new THREE.Mesh(this.geometry, this.material);
+
+  // Sets starting position of bal
   this.ball.position.z = 1;
   this.ball.position.x = this.getStartPosition();
 
   base.addToScene(this.ball);
 }
 
+// Randomly sets an x value for the ball at start
 Ball.prototype.getStartPosition = function()
 {
   var x = Math.random() * 5;
@@ -56,6 +65,7 @@ Ball.prototype.changeY = function(y)
   this.ball.position.y += y;
 }
 
+// Resets to middle of board after score
 Ball.prototype.reset = function()
 {
   this.ball.position.x = this.getStartPosition();

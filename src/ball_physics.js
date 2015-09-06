@@ -1,9 +1,17 @@
+// Dylan Davidson
+// Pong - CAP 4720
+//
+
+// Object that updates ball position on state of scene
 var BallPhysics = function()
 {
+  // Fast X speed when ball is hit on side of paddle
   BallPhysics.FAST_SPEED = 0.15;
+  // Slower X speed when ball is hit in middle of paddle
   BallPhysics.SLOW_SPEED = 0.10;
   BallPhysics.START_X_VELOCITY = BallPhysics.SLOW_SPEED;
   BallPhysics.START_Y_VELOCITY = 0.2;
+
   this.xVelocity = BallPhysics.START_X_VELOCITY;
   this.yVelocity = BallPhysics.START_Y_VELOCITY;
   this.stopped = false;
@@ -15,7 +23,7 @@ var BallPhysics = function()
   }
 }
 
-
+// Checks if ball has hit a wall, and turns it around if it has
 BallPhysics.prototype.checkWallCollision = function()
 {
   if(ball.getX() + 1 > right_wall.getX() || ball.getX() - 1 < left_wall.getX())
@@ -25,6 +33,7 @@ BallPhysics.prototype.checkWallCollision = function()
   }
 }
 
+// Handles when ball has hit paddle, and determines new xVelocity based on where it was hit
 BallPhysics.prototype.handlePaddleCollision = function(paddle)
 {
   if(ball.getX() < paddle.getX() - 0.5)
@@ -47,6 +56,7 @@ BallPhysics.prototype.handlePaddleCollision = function(paddle)
 }
 
 
+// Checks if ball has hit paddle or passed it and player has scored
 BallPhysics.prototype.checkPaddleCollision = function()
 {
   // Ball has reached player paddle area
@@ -86,6 +96,7 @@ BallPhysics.prototype.checkPaddleCollision = function()
   }
 }
 
+// Called each frame to update ball position and velocity
 BallPhysics.prototype.update = function()
 {
   if(!this.stopped)
@@ -100,6 +111,7 @@ BallPhysics.prototype.update = function()
   }
 }
 
+// Called to stop showing goal banner and start moving ball again
 BallPhysics.prototype.endGoal = function()
 {
   this.stopped = false;
@@ -107,6 +119,7 @@ BallPhysics.prototype.endGoal = function()
   particles.stop();
 }
 
+// Called after score to move ball to center of board and setup end goal timeout
 BallPhysics.prototype.reset = function()
 {
   ball.reset();

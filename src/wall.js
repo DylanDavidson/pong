@@ -1,3 +1,8 @@
+// Dylan Davidson
+// Pong - CAP 4720
+//
+
+// Class to create a wall, takes in the x position of the wall
 var Wall = function(x)
 {
   Wall.COLOR = 0x2980b9;
@@ -15,6 +20,7 @@ Wall.prototype.getObject = function()
   return this.wall;
 }
 
+// Returns x position of wall
 Wall.prototype.getX = function()
 {
   return this.wall.position.x;

@@ -1,3 +1,8 @@
+// Dylan Davidson
+// Pong - CAP 4720
+//
+
+// Object that maintains the score of the game and updates score on screen
 var Score = function()
 {
   this.playerScore = 0;
@@ -6,12 +11,14 @@ var Score = function()
   this.playerScoreSpan = document.getElementById('player');
 }
 
+// Called when player scores
 Score.prototype.playerScored = function()
 {
   this.playerScore += 1;
   this.playerScoreSpan.innerText = this.playerScore;
 }
 
+// Called when enemy scores
 Score.prototype.enemyScored = function()
 {
   this.enemyScore += 1;
