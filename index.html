@@ -14,6 +14,7 @@
     <script src="../src/score.js"></script>
     <script src="../src/enemy_ai.js"></script>
     <script src="../src/banner.js"></script>
+    <script src="../src/particle.js"></script>
 
     <link href='https://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
 
@@ -44,7 +45,7 @@
       }
 
       .menu {
-        position: fixed;
+        position: absolute;
         background-color: white;
         width: 100%;
         height: 100%;
@@ -52,17 +53,13 @@
       }
 
       .start {
-        position: absolute;
-        top: 30%;
-        left: 45%;
-        margin-left: -150px;
-        margin-top: -125px;
+        margin-top: 10%;
         color: #2c3e50;
         text-align: center;
       }
 
       .button {
-        padding: 40px 100px;
+        padding: 40px 60px;
         border: 1px solid #2c3e50;
         border-radius: 5px;
       }
@@ -103,12 +100,17 @@
       <div class="start">
         <h1>Pong</h1>
         <br> <br> <br>
-        <a class="button" onclick="start()">Start</a>
+        <a class="button" onclick="start(1)">Beginner</a>
+        <a class="button" onclick="start(2)">Intermediate</a>
+        <a class="button" onclick="start(3)">Expert</a>
         <br> <br>
         <h2>Controls</h2>
         <br>
         <a class="button">&larr;</a>
         <a class="button">&rarr;</a>
+        OR
+        <a class="button">A</a>
+        <a class="button">D</a>
       </div>
       </div>
     </div>

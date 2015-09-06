@@ -19,6 +19,7 @@ var ball;
 var ballPhysics;
 var enemyAI;
 var score;
+var particles;
 
 function init()
 {
@@ -57,9 +58,10 @@ function init()
 }
 
 var count = 3;
-function start()
+function start(difficulty)
 {
-  document.getElementById('menu').remove();
+  document.getElementById('menu').style.display = "none";
+  enemyAI.setDifficulty(difficulty);
   countdown();
 }
 
@@ -109,6 +111,11 @@ function render()
 
   ballPhysics.update();
   enemyAI.update();
+
+  if(particles != null)
+  {
+    particles.update();
+  }
 
   requestAnimationFrame(render);
   base.render();

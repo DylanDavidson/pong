@@ -17,4 +17,3 @@ Score.prototype.enemyScored = function()
   this.enemyScore += 1;
   this.enemyScoreSpan.innerText = this.enemyScore;
 }
-

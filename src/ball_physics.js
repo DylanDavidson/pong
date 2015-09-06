@@ -6,7 +6,7 @@ var BallPhysics = function()
   BallPhysics.START_Y_VELOCITY = 0.2;
   this.xVelocity = BallPhysics.START_X_VELOCITY;
   this.yVelocity = BallPhysics.START_Y_VELOCITY;
-  this.goal = false;
+  this.stopped = false;
 
   // Sometime start in different X direction
   if(Math.random() < 0.5)
@@ -63,6 +63,7 @@ BallPhysics.prototype.checkPaddleCollision = function()
       // Enemy scored
       score.enemyScored();
       Banner.flashText('Goal!', '#e74c3c');
+      particles = new Particle(ball.getX(), ball.getY(), 1, '#e74c3c');
       this.reset();
     }
   }
@@ -79,6 +80,7 @@ BallPhysics.prototype.checkPaddleCollision = function()
       // Player scored
       score.playerScored();
       Banner.flashText('Goal!', '#2ecc71');
+      particles = new Particle(ball.getX(), ball.getY(), 1, '#2ecc71');
       this.reset();
     }
   }
@@ -86,7 +88,7 @@ BallPhysics.prototype.checkPaddleCollision = function()
 
 BallPhysics.prototype.update = function()
 {
-  if(!this.goal)
+  if(!this.stopped)
   {
     ball.changeX(this.xVelocity);
     ball.changeY(this.yVelocity);
@@ -100,8 +102,9 @@ BallPhysics.prototype.update = function()
 
 BallPhysics.prototype.endGoal = function()
 {
-  this.goal = false;
+  this.stopped = false;
   Banner.hideBanner();
+  particles.stop();
 }
 
 BallPhysics.prototype.reset = function()
@@ -109,7 +112,7 @@ BallPhysics.prototype.reset = function()
   ball.reset();
   this.xVelocity = BallPhysics.START_X_VELOCITY;
   this.yVelocity = BallPhysics.START_Y_VELOCITY;
-  this.goal = true;
+  this.stopped = true;
 
   var _this = this;
   setTimeout(function() { _this.endGoal() }, 2000);
