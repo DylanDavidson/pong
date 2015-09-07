@@ -6,12 +6,12 @@ var explode, one, two, three, four, five;
 // Load Audio assets
 function loadSounds()
 {
-  explode = new Audio("/assets/Explosion.mp3");
-  one = new Audio("/assets/1.mp3");
-  two = new Audio("/assets/2.mp3");
-  three = new Audio("/assets/3.mp3");
-  four = new Audio("/assets/4.mp3");
-  five = new Audio("/assets/5.mp3");
+  explode = new Audio("assets/Explosion.mp3");
+  one = new Audio("assets/1.mp3");
+  two = new Audio("assets/2.mp3");
+  three = new Audio("assets/3.mp3");
+  four = new Audio("assets/4.mp3");
+  five = new Audio("assets/5.mp3");
 }
 
 var base;
